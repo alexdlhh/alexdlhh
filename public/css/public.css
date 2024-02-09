@@ -1,0 +1,108 @@
+.cajaUsuario{
+    border: 3px solid #1477c9 !important;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+#productosUsuario{
+    border: 3px solid black;
+    margin-top: 5px !important;
+}
+#productos{
+    border: 0px solid transparent;
+}
+#producto{
+    border: 3px solid #1477c9 !important;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+    text-align: center !important;
+}
+.botton-space{
+    padding-bottom: 20px !important;
+}
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    border-bottom: 1px solid #1477c9 !important;
+}
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    color: #fff;
+    background-color: #1477c9;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+}
+.descripcion{
+    font-size: 20px !important;
+    font-weight: bold !important;
+    padding-top: 10px !important;
+    padding-left: 30px !important;
+}
+.botton{
+    padding-bottom: 10px !important;
+    margin-top: 10px !important;
+}
+.texto{
+    font-size: 30px !important;
+    font-weight: bold !important;
+    padding-top: 10px !important;
+    margin-bottom: -18px !important;
+}
+.indicadorfechas{
+    font-size: 20px !important;
+    font-weight: bold !important;
+    padding-top: 10px !important;
+    padding-left: 30px !important;
+}
+.selectorcategory{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: black !important;
+}
+.selectorproduct{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: black !important;
+}
+.texto2{
+    font-size: 20px !important;
+    font-weight: bold !important;
+    padding-top: 10px !important;
+    margin-bottom: -10px !important;
+}
+.tableborder{
+    border: 3px solid #1477c9 !important;
+}
+.preciototal{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: #1477c9 !important;
+}
+#observacionestotal{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: #1477c9 !important;
+}
+.textinfo{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: #1477c9 !important;
+    margin-top: 50px !important;
+    margin-left: 0px !important;
+}
+.textimportant{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: whitesmoke !important;
+    background-color: #666 !important;
+}
+#imagelogo{
+    height: 250px !important;
+    width: 250px !important;
+    margin-left: 50px !important;
+}
