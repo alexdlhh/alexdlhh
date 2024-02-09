@@ -9,22 +9,22 @@
 @endsection
 
 @section('content')
-    <div class="content">
+    <div class="login_pad">
         <div class="row card">
-            <div class="col offset-s3 s6 card-content">
-                <div class="row">
+            <div class="col offset-s4 s4 card-content">
+                <div class="row ">
                     <div class="col s12">
                         <span class="card-title">Inicio de Sesión</span>
                     </div>
-                    <div class="col s4 input-field">
+                    <div class="col s10 offset-s1 input-field">
                         <input placeholder="" id="email" type="text" class="validate">
                         <label for="email">Email</label>
                     </div>
-                    <div class="col s6 input-field">
+                    <div class="col s10 offset-s1 input-field">
                         <input placeholder="" id="password" type="password" class="validate">
                         <label for="password">Contraseña</label>
                     </div>
-                    <div class="col s12">
+                    <div class="col s12 center-align">
                         <a href="javascript:;" class="btn" id="login">Iniciar Sesión</a>
                         <a href="javascript:;" class="btn" id="forget">He olvidado la contraseña</a>
                     </div>
@@ -52,10 +52,14 @@
                     success: function(data){
                         if(data.success){
                             if(data.success == 'admin'){
+                                M.toast({html: 'Bienvenido Administrador', classes: 'rounded green white-text'});
                                 window.location.href = '{{ route('adminPanel') }}';
+                            }else{
+                                M.toast({html: 'Bienvenido', classes: 'rounded green white-text'});
+                                window.location.href = '{{ route('home') }}';
                             }
                         }else{
-                            alert(data.error);
+                            M.toast({html: 'Email o contraseña incorrectos', classes: 'rounded red white-text'});
                         }
                     }
                 });

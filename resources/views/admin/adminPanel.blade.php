@@ -1,7 +1,7 @@
-@extends('admin.layout')
+@extends('layout')
 
 @section('title')
-    <title>Panel BigFootSki</title>
+    <title>Panel AlexHH</title>
 @endsection
 
 @section('style')
@@ -11,7 +11,16 @@
 @section('content')
     <div class="row card">
         <div class="col s12 card-content">
-            <span class="card-title">Panel BigFootSki</span>
+            <span class="card-title">Panel AlexHH</span>
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    <div class="row">
+                        <div class="col s12">
+                            @dump($user)
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

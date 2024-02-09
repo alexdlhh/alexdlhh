@@ -17,7 +17,6 @@ class HomeController extends Controller
      */
     public function home(){
 
-        // Si el usuario no está autenticado, muestra la vista de login
         return view('home');
     }
 
@@ -29,7 +28,7 @@ class HomeController extends Controller
         // Si el usuario está autenticado, redirige a la vista principal del panel
         if (Auth::check()) {
             //dd(Auth::User());
-            return redirect()->route('panel');
+            return redirect()->route('admin');
         }
 
         // Si el usuario no está autenticado, muestra la vista de login
@@ -107,4 +106,52 @@ class HomeController extends Controller
         return $user->role;
     }
 
+    /**
+     * Muestra la vista de dashboard
+     * @return \Illuminate\View\View
+     */
+    public function dashboard(){
+        $user = Auth::User();
+        // Si el usuario no está autenticado, muestra la vista de login
+        if (!$user) {
+            return redirect()->route('login');
+        }
+        return view('admin.adminPanel', compact('user'));
+    }
+
+    /**
+     * Muestra la vista de forgot
+     * @return \Illuminate\View\View
+     */
+    public function forgot(){
+        return view('forgot');
+    }
+
+    /**
+     * Recupera la contraseña del usuario
+     * @param Request $request
+     */
+    public function do_forgot(Request $request){
+        // Valida los datos del formulario de recuperación de contraseña
+        $credentials = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Busca al usuario por su correo electrónico
+        $user = User::where('email', $credentials['email'])->first();
+
+        // Si el usuario no existe, muestra un error
+        if (!$user) {
+            return response()->json(['error' => 'El correo electrónico ingresado no está registrado.'], 401);
+        }
+
+        // Genera un token de recuperación de contraseña
+        $token = $user->createToken('password_reset')->plainTextToken;
+
+        // Envia un correo electrónico con el token de recuperación de contraseña
+        $user->sendPasswordResetNotification($token);
+
+        // Muestra un mensaje de éxito
+        return response()->json(['success' => 'Se ha enviado un correo electrónico con las instrucciones para recuperar tu contraseña.'], 200);
+    }
 }

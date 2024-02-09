@@ -12,10 +12,13 @@
     <div class="content">
         <div class="row card">
             <div class="col s12 center-align">
-                <h1>FUFA EN EL ORDENADOR DE CASA</h1>
+                <h1>FUFA DESDE ORDENADOR DE CASA</h1>
             </div>
+        </div>
+        <div class="row card">
             <div class="col s12 center-align">
-                <p>wiiiii</p>
+                <h2>Stable Diffusion XL</h2>
+                <iframe id="sdxl" src="https://apiservices.besoccerapps.com/stableDiffusion/interface" frameborder="0"></iframe>
             </div>
         </div>
     </div>
