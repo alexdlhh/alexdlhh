@@ -18,7 +18,7 @@
         <div class="row card">
             <div class="col s12 center-align">
                 <h2>Stable Diffusion XL</h2>
-                <iframe id="sdxl" src="https://apiservices.besoccerapps.com/stableDiffusion/interface" frameborder="0"></iframe>
+                <iframe id="sdxl" src="http://alexdlhh.ddns.net:7860/" frameborder="0"></iframe>
             </div>
         </div>
     </div>
