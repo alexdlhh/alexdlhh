@@ -116,7 +116,7 @@ class HomeController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-        return view('admin.adminPanel', compact('user'));
+        return view('admin.adminPanel', compact('user', 'api_token'));
     }
 
     /**

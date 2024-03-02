@@ -2,15 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RentController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\ParticularController;
-use App\Http\Controllers\ColaboratorsController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\RepairController;
+use App\Http\Controllers\SDController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -26,4 +18,5 @@ Route::post('/do_register', [HomeController::class, 'do_register'])->name('do_re
 Route::group(['middleware' => ['auth']], function () {    
     Route::get('/admin', [HomeController::class, 'dashboard'])->name('adminPanel');
     Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+    Route::post('/txt2img', [SDController::class, 'txt2img'])->name('txt2img');
 }); 

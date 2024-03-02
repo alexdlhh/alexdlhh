@@ -17,6 +17,7 @@
                     <div class="row">
                         <div class="col s12">
                             @dump($user)
+                            @dump($api_token)
                         </div>
                     </div>
                 </div>
