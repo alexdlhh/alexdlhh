@@ -7,6 +7,7 @@ localhost:8010
 ```
 docker-compose up -d
 docker-compose exec app composer install
+docker-compose exec app composer require laravel/passport --with-all-dependencies
 ```
 
 #migrar bbdd

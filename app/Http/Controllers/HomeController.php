@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
+    public function issueToken()
+    {
+        return '';
+    }
     /**
      * Muestra la vista de home
      * @return \Illuminate\View\View
@@ -116,7 +120,31 @@ class HomeController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-        return view('admin.adminPanel', compact('user', 'api_token'));
+        //comprobamos si este usuario tiene un token
+        $api_token = $user->tokens()->where('name', 'my-token')->first();
+        if (!$api_token) {
+            $api_token = $user->createToken('my-token');
+            $user->token = $api_token->accessToken;
+            $user->save();
+        }else{
+            $api_token = ["accessToken"=>$user->token];//'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDkzMDMzZGYwN2VhNzdkNzg1MTZkMDM1OTI4N2ZiODcxNzcyNmUzMzZlZjdjMTA0ODA5ZjY3ZTljZmFiMjdmMTRjYWE2ODVhMzgwNmE5YzIiLCJpYXQiOjE3MDk0MDA4MDkuNTg5NzMyLCJuYmYiOjE3MDk0MDA4MDkuNTg5NzM2LCJleHAiOjE3NDA5MzY4MDkuNTM0OTYxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.gy8nZY1A1XDLu929ksd83LsczIYOwXVom9cWdXDqJ-85UzWAB1SoUVbVm5dX8pP1PF9evg4c5CrtFrjsL1Fa--xotIja_AdNahRmsrGIFibB31RlAMq7oTDkPIwCoOW8WVAR4vyEzo44EghyEewhrfQXAQxQef2BucnpL3SdkDcUjD6MZrCfnbW1lwLJfH2g7H6WdnykTS2S2IeSwbcoKBXc8johsaOLv9z5qpuAF44DxY0KN_mLTVq8lvpUJacafcoH44Cjl1nXrHrWPCCkeuRjpx_4n7ilJLk2RGRy3WJP3PgbIPRRhk3ft1fHp57piH9WIQ2JtoDwfoALIbOit43LdyWRFnK1wcz23N1X4c2GZlW0hE8i-8MjhTfmrFVd9mP_UlTwuXCxUdHdEhCzDZcUEhXJdBOS-ZoqXueAIol69SvsJwYMyCUpqktRb9E22Zj8rTOX5wfaAzsQdikpmqQnc7qSNThG1CdFX3zdzN9HKXuCS00ZyzkeVCn_wcT74pS-0OSfZEjqW_FkTIeVEPBX9uDeOQLV_S8XnqDCZk7mvcTaqmcCwU0a9bGSrnUDD_JtQsmLSMqitHF0ZBr-ANBF-h4QQZ1xon7HU8RtIBjIOJrq6bXGZe1MlhaJ-zq_5q4AnGw0m6H_LpTxxZhyyUtfW4dR0qLQh1tFouqQvR8'];
+            //transformamos el token en un objeto
+            $api_token = (object) $api_token;
+        }
+        $metrics = file_get_contents('/var/www/public/metrics/metrics.json');
+        $metrics = json_decode($metrics, true);
+        $metrics=$metrics[$user->id];
+        $metrics = json_encode($metrics);
+        return view('admin.adminPanel', compact('user', 'api_token', 'metrics'));
+    }
+
+    public function ip(Request $request){
+        $ip = $request->ipG;
+        $fecha = date("Y-m-d H:i:s");
+        $fp = fopen('access2.log', 'a');
+        fwrite($fp, $ip . " - - [" . $fecha . "] " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI'] . " " . $_SERVER['SERVER_PROTOCOL'] . "\n");
+        fclose($fp);
+
     }
 
     /**

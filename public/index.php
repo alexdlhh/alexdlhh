@@ -53,3 +53,26 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);
+
+
+//escribimos en access.log la ip que nos visita
+if (getenv('HTTP_CLIENT_IP')) {
+    $ip = getenv('HTTP_CLIENT_IP');
+  } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+    $ip = getenv('HTTP_X_FORWARDED_FOR');
+  } elseif (getenv('HTTP_X_FORWARDED')) {
+    $ip = getenv('HTTP_X_FORWARDED');
+  } elseif (getenv('HTTP_FORWARDED_FOR')) {
+    $ip = getenv('HTTP_FORWARDED_FOR');
+  } elseif (getenv('HTTP_FORWARDED')) {
+    $ip = getenv('HTTP_FORWARDED');
+  } else {
+    // Método por defecto de obtener la IP del usuario
+    // Si se utiliza un proxy, esto nos daría la IP del proxy
+    // y no la IP real del usuario.
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+$fecha = date("Y-m-d H:i:s");
+$fp = fopen('access.log', 'a');
+fwrite($fp, $ip . " - - [" . $fecha . "] " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI'] . " " . $_SERVER['SERVER_PROTOCOL'] . "\n");
+fclose($fp);

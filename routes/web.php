@@ -6,8 +6,12 @@ use App\Http\Controllers\SDController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/.env', [HomeController::class, 'home'])->name('home');
+Route::get('/.git', [HomeController::class, 'home'])->name('home');
+Route::get('/.htaccess', [HomeController::class, 'home'])->name('home');
 
 Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::post('/ip', [HomeController::class, 'ip'])->name('ip');
 Route::get('/forgot', [HomeController::class, 'forgot'])->name('forgot');
 Route::post('/do_login', [HomeController::class, 'do_login'])->name('do_login');
 Route::post('/do_forgot', [HomeController::class, 'do_forgot'])->name('do_forgot');
@@ -19,4 +23,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', [HomeController::class, 'dashboard'])->name('adminPanel');
     Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
     Route::post('/txt2img', [SDController::class, 'txt2img'])->name('txt2img');
+    Route::post('/img2img', [SDController::class, 'img2img'])->name('img2img');
 }); 
